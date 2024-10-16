@@ -28,6 +28,9 @@
 	"entrypoints": {
 		"main": [
 			"folk.sisby.shattered_stopwatch.ShatteredStopwatch"
+		],
+		"client": [
+			"folk.sisby.shattered_stopwatch.client.ShatteredStopwatchClient"
 		]
 	}
 }

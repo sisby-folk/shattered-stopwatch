@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "shattered_stopwatch:item/stopwatch_active"
+	}
+}
