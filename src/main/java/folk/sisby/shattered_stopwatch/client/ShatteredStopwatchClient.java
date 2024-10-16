@@ -9,7 +9,7 @@ public class ShatteredStopwatchClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		ModelPredicateProviderRegistry.register(ShatteredStopwatch.STOPWATCH, Identifier.of(ShatteredStopwatch.ID, "stopwatch_active"),
-			(stack, world, entity, i) -> entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0F : 0.0F
+			(stack, world, entity, i) -> stack.contains(ShatteredStopwatch.ACTIVE_STOPWATCH) ? 1.0F : 0.0F
 		);
 	}
 }

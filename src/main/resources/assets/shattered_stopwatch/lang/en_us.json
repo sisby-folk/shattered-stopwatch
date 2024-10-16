@@ -1,4 +1,7 @@
 {
 	"item.shattered_stopwatch.stopwatch": "Shattered Stopwatch",
-	"item.shattered_stopwatch.stopwatch.active": "Ticking Stopwatch"
+	"item.shattered_stopwatch.stopwatch.active": "Ticking Stopwatch",
+
+	"action.shattered_stopwatch.lap": "Ticking Stopwatch - Lap %s",
+	"action.shattered_stopwatch.stop": "Shattered Stopwatch - %s Laps, %s Seconds"
 }
