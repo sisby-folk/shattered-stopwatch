@@ -2,9 +2,12 @@ package folk.sisby.shattered_stopwatch;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.component.ComponentType;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import org.slf4j.Logger;
@@ -19,6 +22,7 @@ public class ShatteredStopwatch implements ModInitializer {
 	public static final ComponentType<ActiveStopwatchComponent> ACTIVE_STOPWATCH = Registry.register(Registries.DATA_COMPONENT_TYPE, Identifier.of(ID, "active_stopwatch"),
 		ComponentType.<ActiveStopwatchComponent>builder().codec(ActiveStopwatchComponent.CODEC).build()
 	);
+	public static final TagKey<Enchantment> REFLECTION = TagKey.of(RegistryKeys.ENCHANTMENT, Identifier.of(ID, "reflection"));
 
 	@Override
 	public void onInitialize() {

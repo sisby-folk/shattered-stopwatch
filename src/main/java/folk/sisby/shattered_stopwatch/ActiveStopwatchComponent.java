@@ -22,9 +22,11 @@ public record ActiveStopwatchComponent(RegistryKey<World> startDimension, Vec3d 
 		Codec.list(Vec3d.CODEC).fieldOf("lapPositions").forGetter(ActiveStopwatchComponent::lapPositions)
 	).apply(instance, ActiveStopwatchComponent::new));
 
-	public ActiveStopwatchComponent withLap(Vec3d lapPosition) {
+	public ActiveStopwatchComponent withLap(Vec3d lapPosition, int instances) {
 		List<Vec3d> newLaps = new ArrayList<>(lapPositions);
-		newLaps.add(lapPosition);
+		for (int i = 0; i < instances; i++) {
+			newLaps.add(lapPosition);
+		}
 		return new ActiveStopwatchComponent(startDimension, startPosition, startYaw, startPitch, startFallDistance, startTick, lap + 1, newLaps);
 	}
 

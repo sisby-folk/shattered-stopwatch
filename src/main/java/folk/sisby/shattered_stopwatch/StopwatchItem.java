@@ -1,5 +1,8 @@
 package folk.sisby.shattered_stopwatch;
 
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Multiset;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -36,8 +39,10 @@ public class StopwatchItem extends Item {
 			if (stack.contains(ShatteredStopwatch.ACTIVE_STOPWATCH)) {
 				ActiveStopwatchComponent asc = stack.get(ShatteredStopwatch.ACTIVE_STOPWATCH);
 				// Particles
-				for (Vec3d lapPosition : asc.lapPositions()) {
-					world.addParticle(new DustParticleEffect(new Vector3f(1.0F, 0.3F, 1.0F), 1.0F), lapPosition.x, lapPosition.y + entity.getHeight() / 2, lapPosition.z, 0, 0, 0);
+				Multiset<Vec3d> echoes = HashMultiset.create(asc.lapPositions());
+				for (Vec3d lapPosition : echoes.elementSet()) {
+					boolean multiRemaining = echoes.count(lapPosition) > 1;
+					world.addParticle(new DustParticleEffect(new Vector3f(1.0F,  multiRemaining ? 0.3F : 0.0F, multiRemaining ? 1.0F : 0.0F), 1.0F), lapPosition.x, lapPosition.y + entity.getHeight() / 2, lapPosition.z, 0, 0, 0);
 				}
 				// Boosts
 				Vec3d usedLap = null;
@@ -76,7 +81,8 @@ public class StopwatchItem extends Item {
 			}
 		} else {
 			if (stack.contains(ShatteredStopwatch.ACTIVE_STOPWATCH)) { // Lap
-				stack.apply(ShatteredStopwatch.ACTIVE_STOPWATCH, null, asc -> asc.withLap(user.getPos()));
+				boolean multi = EnchantmentHelper.hasAnyEnchantmentsIn(stack, ShatteredStopwatch.REFLECTION);
+				stack.apply(ShatteredStopwatch.ACTIVE_STOPWATCH, null, asc -> asc.withLap(user.getPos(),  multi ? 2 : 1));
 				ActiveStopwatchComponent asc = stack.get(ShatteredStopwatch.ACTIVE_STOPWATCH);
 				user.setPosition(asc.startPosition());
 				user.setYaw(asc.startYaw());
