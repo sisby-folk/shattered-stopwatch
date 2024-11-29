@@ -18,7 +18,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.joml.Vector3f;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class StopwatchItem extends Item {
 	public StopwatchItem(Settings settings) {
@@ -32,14 +32,19 @@ public class StopwatchItem extends Item {
 
 	@Override
 	public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-		if (stack.contains(ShatteredStopwatch.ACTIVE_STOPWATCH) && !world.getRegistryKey().equals(stack.get(ShatteredStopwatch.ACTIVE_STOPWATCH).startDimension())) {
-			stack.remove(ShatteredStopwatch.ACTIVE_STOPWATCH);
-		}
-		if (entity instanceof PlayerEntity user && (user.getStackInHand(Hand.MAIN_HAND).equals(stack) || user.getStackInHand(Hand.OFF_HAND).equals(stack))) {
-			if (stack.contains(ShatteredStopwatch.ACTIVE_STOPWATCH)) {
+		if (!(entity instanceof PlayerEntity player)) return;
+		if (stack.contains(ShatteredStopwatch.ACTIVE_STOPWATCH)) {
+			if ((player.getStackInHand(Hand.MAIN_HAND) != stack && player.getStackInHand(Hand.OFF_HAND) != stack) || !world.getRegistryKey().equals(stack.get(ShatteredStopwatch.ACTIVE_STOPWATCH).startDimension())) {
+				ActiveStopwatchComponent asc = stack.get(ShatteredStopwatch.ACTIVE_STOPWATCH);
+				player.playSound(SoundEvents.BLOCK_GLASS_BREAK);
+				player.sendMessage(Text.translatable("action.shattered_stopwatch.stop", asc.lap() + 1, (world.getTime() - asc.startTick()) / 20).formatted(Formatting.RED), true);
+				stack.remove(ShatteredStopwatch.ACTIVE_STOPWATCH);
+				return;
+			} else {
 				ActiveStopwatchComponent asc = stack.get(ShatteredStopwatch.ACTIVE_STOPWATCH);
 				// Particles
 				Multiset<Vec3d> echoes = HashMultiset.create(asc.lapPositions());
+				echoes.removeAll(asc.touchedThisLap());
 				for (Vec3d lapPosition : echoes.elementSet()) {
 					boolean multiRemaining = echoes.count(lapPosition) > 1;
 					world.addParticle(new DustParticleEffect(new Vector3f(1.0F,  multiRemaining ? 0.3F : 0.0F, multiRemaining ? 1.0F : 0.0F), 1.0F), lapPosition.x, lapPosition.y + entity.getHeight() / 2, lapPosition.z, 0, 0, 0);
@@ -81,8 +86,7 @@ public class StopwatchItem extends Item {
 			}
 		} else {
 			if (stack.contains(ShatteredStopwatch.ACTIVE_STOPWATCH)) { // Lap
-				boolean multi = EnchantmentHelper.hasAnyEnchantmentsIn(stack, ShatteredStopwatch.REFLECTION);
-				stack.apply(ShatteredStopwatch.ACTIVE_STOPWATCH, null, asc -> asc.withLap(user.getPos(),  multi ? 2 : 1));
+				Vec3d echoPos = user.getPos();
 				ActiveStopwatchComponent asc = stack.get(ShatteredStopwatch.ACTIVE_STOPWATCH);
 				user.requestTeleport(asc.startPosition().x, asc.startPosition().y, asc.startPosition().z);
 				user.setYaw(asc.startYaw());
@@ -90,14 +94,15 @@ public class StopwatchItem extends Item {
 				user.fallDistance = 0; // Overridden. Just seems more fun right now.
 				user.setVelocity(0, 0, 0);
 				user.playSound(SoundEvents.ITEM_SPYGLASS_USE);
-				user.sendMessage(Text.translatable("action.shattered_stopwatch.lap", asc.lap() + 1).formatted(Formatting.LIGHT_PURPLE), true);
-				return new TypedActionResult<>(ActionResult.SUCCESS_NO_ITEM_USED, stack);
+				user.sendMessage(Text.translatable("action.shattered_stopwatch.lap", asc.lap() + 2).formatted(Formatting.LIGHT_PURPLE), true);
+				boolean multi = EnchantmentHelper.hasAnyEnchantmentsIn(stack, ShatteredStopwatch.REFLECTION);
+				stack.apply(ShatteredStopwatch.ACTIVE_STOPWATCH, null, c -> c.withLap(echoPos,  multi ? 2 : 1));
 			} else { // Start
-				stack.set(ShatteredStopwatch.ACTIVE_STOPWATCH, new ActiveStopwatchComponent(world.getRegistryKey(), user.getPos(), user.getYaw(), user.getPitch(), user.fallDistance, world.getTime(), 0, List.of()));
-				user.playSound(SoundEvents.BLOCK_AMETHYST_BLOCK_STEP, 2.0F, 1.5F);
+				stack.set(ShatteredStopwatch.ACTIVE_STOPWATCH, new ActiveStopwatchComponent(world.getRegistryKey(), user.getPos(), user.getYaw(), user.getPitch(), user.fallDistance, world.getTime(), 0, new ArrayList<>(), new ArrayList<>()));
+				user.playSound(SoundEvents.BLOCK_ANVIL_USE, 2.0F, 1.5F);
 				user.sendMessage(Text.translatable("action.shattered_stopwatch.lap", 1).formatted(Formatting.AQUA), true);
-				return new TypedActionResult<>(ActionResult.SUCCESS_NO_ITEM_USED, stack);
 			}
+			return new TypedActionResult<>(ActionResult.SUCCESS_NO_ITEM_USED, stack);
 		}
 		return super.use(world, user, hand);
 	}

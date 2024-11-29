@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public record ActiveStopwatchComponent(RegistryKey<World> startDimension, Vec3d startPosition, float startYaw, float startPitch, float startFallDistance, long startTick, int lap, List<Vec3d> lapPositions) {
+public record ActiveStopwatchComponent(RegistryKey<World> startDimension, Vec3d startPosition, float startYaw, float startPitch, float startFallDistance, long startTick, int lap, List<Vec3d> lapPositions, List<Vec3d> touchedThisLap) {
 	public static final Codec<ActiveStopwatchComponent> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 		RegistryKey.createCodec(RegistryKeys.WORLD).fieldOf("startDimension").forGetter(ActiveStopwatchComponent::startDimension),
 		Vec3d.CODEC.fieldOf("startPosition").forGetter(ActiveStopwatchComponent::startPosition),
@@ -19,20 +19,23 @@ public record ActiveStopwatchComponent(RegistryKey<World> startDimension, Vec3d 
 		Codec.FLOAT.fieldOf("startFallDistance").forGetter(ActiveStopwatchComponent::startFallDistance),
 		Codec.LONG.fieldOf("startTick").forGetter(ActiveStopwatchComponent::startTick),
 		Codec.INT.fieldOf("lap").forGetter(ActiveStopwatchComponent::lap),
-		Codec.list(Vec3d.CODEC).fieldOf("lapPositions").forGetter(ActiveStopwatchComponent::lapPositions)
-	).apply(instance, ActiveStopwatchComponent::new));
+		Codec.list(Vec3d.CODEC).fieldOf("lapPositions").forGetter(ActiveStopwatchComponent::lapPositions),
+		Codec.list(Vec3d.CODEC).fieldOf("touchedThisLap").forGetter(ActiveStopwatchComponent::touchedThisLap)
+		).apply(instance, ActiveStopwatchComponent::new));
 
 	public ActiveStopwatchComponent withLap(Vec3d lapPosition, int instances) {
 		List<Vec3d> newLaps = new ArrayList<>(lapPositions);
 		for (int i = 0; i < instances; i++) {
 			newLaps.add(lapPosition);
 		}
-		return new ActiveStopwatchComponent(startDimension, startPosition, startYaw, startPitch, startFallDistance, startTick, lap + 1, newLaps);
+		return new ActiveStopwatchComponent(startDimension, startPosition, startYaw, startPitch, startFallDistance, startTick, lap + 1, newLaps, new ArrayList<>());
 	}
 
 	public ActiveStopwatchComponent withoutLap(Vec3d usedLap) {
 		List<Vec3d> newLaps = new ArrayList<>(lapPositions);
+		List<Vec3d> newTouched = new ArrayList<>(touchedThisLap);
 		newLaps.remove(usedLap);
-		return new ActiveStopwatchComponent(startDimension, startPosition, startYaw, startPitch, startFallDistance, startTick, lap, newLaps);
+		newTouched.add(usedLap);
+		return new ActiveStopwatchComponent(startDimension, startPosition, startYaw, startPitch, startFallDistance, startTick, lap, newLaps, newTouched);
 	}
 }
