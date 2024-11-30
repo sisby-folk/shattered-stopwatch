@@ -58,6 +58,7 @@ public class StopwatchItem extends Item {
 					}
 				}
 				if (usedLap != null) {
+					entity.fallDistance = 0;
 					entity.addVelocity(0, 1 - entity.getVelocity().getY(), 0);
 					entity.playSound(SoundEvents.BLOCK_LARGE_AMETHYST_BUD_BREAK, 1.0F, 1.0F);
 					final Vec3d removeLap = usedLap;
@@ -88,11 +89,11 @@ public class StopwatchItem extends Item {
 			if (stack.contains(ShatteredStopwatch.ACTIVE_STOPWATCH)) { // Lap
 				Vec3d echoPos = user.getPos();
 				ActiveStopwatchComponent asc = stack.get(ShatteredStopwatch.ACTIVE_STOPWATCH);
-				user.requestTeleport(asc.startPosition().x, asc.startPosition().y, asc.startPosition().z);
-				user.setYaw(asc.startYaw());
-				user.setPitch(asc.startPitch());
-				user.fallDistance = 0; // Overridden. Just seems more fun right now.
-				user.setVelocity(0, 0, 0);
+				user.fallDistance = 0;
+				if (world.isClient) {
+					user.refreshPositionAndAngles(asc.startPosition(), asc.startYaw(), asc.startPitch());
+				}
+				user.setVelocity(Vec3d.ZERO);
 				user.playSound(SoundEvents.ITEM_SPYGLASS_USE);
 				user.sendMessage(Text.translatable("action.shattered_stopwatch.lap", asc.lap() + 2).formatted(Formatting.LIGHT_PURPLE), true);
 				boolean multi = EnchantmentHelper.hasAnyEnchantmentsIn(stack, ShatteredStopwatch.REFLECTION);

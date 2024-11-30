@@ -6,5 +6,7 @@
 	"action.shattered_stopwatch.stop": "Shattered Stopwatch - %s Laps, %s Seconds",
 
 	"enchantment.shattered_stopwatch.reflection": "Reflection",
-	"tag.enchantment.shattered_stopwatch.reflection": "Reflection"
+	"tag.enchantment.shattered_stopwatch.reflection": "Reflection",
+
+	"tag.item.shattered_stopwatch.enchantable.reflection": "Reflection Enchantable"
 }
