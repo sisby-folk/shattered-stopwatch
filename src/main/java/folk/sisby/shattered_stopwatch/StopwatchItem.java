@@ -40,15 +40,23 @@ public class StopwatchItem extends Item {
 	}
 
 	public void start(ItemStack stack, PlayerEntity user) {
+		if (!user.isOnGround()) {
+			if (user.getWorld().isClient()) {
+				user.playSound(SoundEvents.BLOCK_LEVER_CLICK, 0.7F, 2.0F);
+			}
+			return;
+		}
 		boolean reflection = EnchantmentHelper.hasAnyEnchantmentsIn(stack, ShatteredStopwatch.REFLECTION);
 		stack.set(ShatteredStopwatch.ACTIVE_STOPWATCH, new ActiveStopwatchComponent(user.getWorld().getRegistryKey(), user.getPos(), user.getYaw(), user.getPitch(), user.fallDistance, user.getWorld().getTime(), 0, new ArrayList<>(), new ArrayList<>()));
 		user.playSound(SoundEvents.BLOCK_ANVIL_USE, 2.0F, 1.5F);
-		user.sendMessage(Text.translatable(
-			"tooltip.shattered_stopwatch.stopwatch.lap",
-			Text.translatable("tooltip.shattered_stopwatch.stopwatch.lap.ticker").formatted(reflection ? Formatting.LIGHT_PURPLE : Formatting.DARK_RED).formatted(Formatting.OBFUSCATED),
-			Text.translatable("action.shattered_stopwatch.start" + (reflection ? ".reflection." + user.getRandom().nextInt(10) : "")).formatted(Formatting.WHITE).formatted(Formatting.ITALIC),
-			Text.translatable("tooltip.shattered_stopwatch.stopwatch.lap.ticker").formatted(reflection ? Formatting.LIGHT_PURPLE : Formatting.DARK_RED).formatted(Formatting.OBFUSCATED)
-		), true);
+		if (user.getWorld().isClient()) {
+			user.sendMessage(Text.translatable(
+				"tooltip.shattered_stopwatch.stopwatch.lap",
+				Text.translatable("tooltip.shattered_stopwatch.stopwatch.lap.ticker").formatted(reflection ? Formatting.LIGHT_PURPLE : Formatting.DARK_RED).formatted(Formatting.OBFUSCATED),
+				Text.translatable("action.shattered_stopwatch.start" + (reflection ? ".reflection." + user.getRandom().nextInt(10) : "")).formatted(Formatting.WHITE).formatted(Formatting.ITALIC),
+				Text.translatable("tooltip.shattered_stopwatch.stopwatch.lap.ticker").formatted(reflection ? Formatting.LIGHT_PURPLE : Formatting.DARK_RED).formatted(Formatting.OBFUSCATED)
+			), true);
+		}
 	}
 
 	private void lap(ItemStack stack, PlayerEntity user) {
@@ -62,12 +70,14 @@ public class StopwatchItem extends Item {
 		}
 		user.setVelocity(Vec3d.ZERO);
 		user.playSound(SoundEvents.ITEM_SPYGLASS_USE);
-		user.sendMessage(Text.translatable(
-			"tooltip.shattered_stopwatch.stopwatch.lap",
-			Text.translatable("tooltip.shattered_stopwatch.stopwatch.lap.ticker").formatted(reflection ? Formatting.LIGHT_PURPLE : Formatting.DARK_RED).formatted(Formatting.OBFUSCATED),
-			Text.translatable("tooltip.shattered_stopwatch.stopwatch.lap.count", asc.lap() + 2).formatted(Formatting.WHITE),
-			Text.translatable("tooltip.shattered_stopwatch.stopwatch.lap.ticker").formatted(reflection ? Formatting.LIGHT_PURPLE : Formatting.DARK_RED).formatted(Formatting.OBFUSCATED)
-		), true);
+		if (user.getWorld().isClient()) {
+			user.sendMessage(Text.translatable(
+				"tooltip.shattered_stopwatch.stopwatch.lap",
+				Text.translatable("tooltip.shattered_stopwatch.stopwatch.lap.ticker").formatted(reflection ? Formatting.LIGHT_PURPLE : Formatting.DARK_RED).formatted(Formatting.OBFUSCATED),
+				Text.translatable("tooltip.shattered_stopwatch.stopwatch.lap.count", asc.lap() + 2).formatted(Formatting.WHITE),
+				Text.translatable("tooltip.shattered_stopwatch.stopwatch.lap.ticker").formatted(reflection ? Formatting.LIGHT_PURPLE : Formatting.DARK_RED).formatted(Formatting.OBFUSCATED)
+			), true);
+		}
 		boolean multi = EnchantmentHelper.hasAnyEnchantmentsIn(stack, ShatteredStopwatch.REFLECTION);
 		stack.apply(ShatteredStopwatch.ACTIVE_STOPWATCH, null, c -> c.withLap(echoPos, multi ? 2 : 1));
 	}
@@ -78,12 +88,14 @@ public class StopwatchItem extends Item {
 		if (asc == null) return;
 		user.playSound(SoundEvents.BLOCK_GLASS_BREAK);
 		long seconds = (user.getWorld().getTime() - asc.startTick()) / 20;
-		user.sendMessage(Text.translatable(
-			"action.shattered_stopwatch.stop",
-			Text.translatable("action.shattered_stopwatch.stop.shattered").formatted(reflection ? Formatting.LIGHT_PURPLE : Formatting.DARK_RED),
-			Text.translatable("action.shattered_stopwatch.stop.laps" + (asc.lap() == 0 ? ".single" : ""), asc.lap() + 1).formatted(Formatting.WHITE),
-			Text.translatable("action.shattered_stopwatch.stop.seconds" + (seconds == 1 ? ".single" : ""), seconds).formatted(Formatting.WHITE)
-		).formatted(Formatting.GRAY), true);
+		if (user.getWorld().isClient()) {
+			user.sendMessage(Text.translatable(
+				"action.shattered_stopwatch.stop",
+				Text.translatable("action.shattered_stopwatch.stop.shattered").formatted(reflection ? Formatting.LIGHT_PURPLE : Formatting.DARK_RED),
+				Text.translatable("action.shattered_stopwatch.stop.laps" + (asc.lap() == 0 ? ".single" : ""), asc.lap() + 1).formatted(Formatting.WHITE),
+				Text.translatable("action.shattered_stopwatch.stop.seconds" + (seconds == 1 ? ".single" : ""), seconds).formatted(Formatting.WHITE)
+			).formatted(Formatting.GRAY), true);
+		}
 		stack.remove(ShatteredStopwatch.ACTIVE_STOPWATCH);
 	}
 
