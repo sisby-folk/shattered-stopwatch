@@ -2,11 +2,35 @@
 	"item.shattered_stopwatch.stopwatch": "Shattered Stopwatch",
 	"item.shattered_stopwatch.stopwatch.active": "Ticking Stopwatch",
 
-	"action.shattered_stopwatch.lap": "Ticking Stopwatch - Lap %s",
-	"action.shattered_stopwatch.stop": "Shattered Stopwatch - %s Laps, %s Seconds",
+	"action.shattered_stopwatch.start": "Ticking restarts...",
+	"action.shattered_stopwatch.start.reflection.0": "Hey there.",
+	"action.shattered_stopwatch.start.reflection.1": "Me again.",
+	"action.shattered_stopwatch.start.reflection.2": "How've you been?",
+	"action.shattered_stopwatch.start.reflection.3": "Take my hand.",
+	"action.shattered_stopwatch.start.reflection.4": "Somewhere in mind?",
+	"action.shattered_stopwatch.start.reflection.5": "Let's dance.",
+	"action.shattered_stopwatch.start.reflection.6": "Missed me?",
+	"action.shattered_stopwatch.start.reflection.7": "Always here.",
+	"action.shattered_stopwatch.start.reflection.8": "Need some help?",
+	"action.shattered_stopwatch.start.reflection.9": "Missed you too.",
+	"action.shattered_stopwatch.stop": "%s after %s, %s",
+	"action.shattered_stopwatch.stop.shattered": "Shattered",
+	"action.shattered_stopwatch.stop.laps.single": "%s lap",
+	"action.shattered_stopwatch.stop.laps": "%s laps",
+	"action.shattered_stopwatch.stop.seconds.single": "%s second",
+	"action.shattered_stopwatch.stop.seconds": "%s seconds",
+
+	"tooltip.shattered_stopwatch.stopwatch.inactive": "Safer this way.",
+	"tooltip.shattered_stopwatch.stopwatch.inactive.reflection": "An old friend.",
+
+	"tooltip.shattered_stopwatch.stopwatch.active": "Hold on tight.",
+	"tooltip.shattered_stopwatch.stopwatch.active.reflection": "I've got you.",
+	"tooltip.shattered_stopwatch.stopwatch.lap": "%s %s %s",
+	"tooltip.shattered_stopwatch.stopwatch.lap.ticker": "Tick",
+	"tooltip.shattered_stopwatch.stopwatch.lap.count": "Lap %s",
 
 	"enchantment.shattered_stopwatch.reflection": "Reflection",
 	"tag.enchantment.shattered_stopwatch.reflection": "Reflection",
 
-	"tag.item.shattered_stopwatch.enchantable.reflection": "Reflection Enchantable"
+	"tag.item.shattered_stopwatch.enchantable.reflection": "Reflection enchantable"
 }
