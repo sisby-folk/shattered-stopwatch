@@ -1,0 +1,28 @@
+	{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "shattered_stopwatch:item/stopwatch_active_0"
+	},
+	"overrides": [
+		{ "predicate": { "shattered_stopwatch:tick": 0 }, "model": "shattered_stopwatch:item/stopwatch_active_0" },
+		{ "predicate": { "shattered_stopwatch:tick": 1 }, "model": "shattered_stopwatch:item/stopwatch_active_1" },
+		{ "predicate": { "shattered_stopwatch:tick": 2 }, "model": "shattered_stopwatch:item/stopwatch_active_2" },
+		{ "predicate": { "shattered_stopwatch:tick": 3 }, "model": "shattered_stopwatch:item/stopwatch_active_3" },
+		{ "predicate": { "shattered_stopwatch:tick": 4 }, "model": "shattered_stopwatch:item/stopwatch_active_4" },
+		{ "predicate": { "shattered_stopwatch:tick": 5 }, "model": "shattered_stopwatch:item/stopwatch_active_5" },
+		{ "predicate": { "shattered_stopwatch:tick": 6 }, "model": "shattered_stopwatch:item/stopwatch_active_6" },
+		{ "predicate": { "shattered_stopwatch:tick": 7 }, "model": "shattered_stopwatch:item/stopwatch_active_7" },
+		{ "predicate": { "shattered_stopwatch:tick": 8 }, "model": "shattered_stopwatch:item/stopwatch_active_8" },
+		{ "predicate": { "shattered_stopwatch:tick": 9 }, "model": "shattered_stopwatch:item/stopwatch_active_9" },
+		{ "predicate": { "shattered_stopwatch:tick": 10 }, "model": "shattered_stopwatch:item/stopwatch_active_1" },
+		{ "predicate": { "shattered_stopwatch:tick": 11 }, "model": "shattered_stopwatch:item/stopwatch_active_1" },
+		{ "predicate": { "shattered_stopwatch:tick": 12 }, "model": "shattered_stopwatch:item/stopwatch_active_2" },
+		{ "predicate": { "shattered_stopwatch:tick": 13 }, "model": "shattered_stopwatch:item/stopwatch_active_3" },
+		{ "predicate": { "shattered_stopwatch:tick": 14 }, "model": "shattered_stopwatch:item/stopwatch_active_4" },
+		{ "predicate": { "shattered_stopwatch:tick": 15 }, "model": "shattered_stopwatch:item/stopwatch_active_5" },
+		{ "predicate": { "shattered_stopwatch:tick": 16 }, "model": "shattered_stopwatch:item/stopwatch_active_6" },
+		{ "predicate": { "shattered_stopwatch:tick": 17 }, "model": "shattered_stopwatch:item/stopwatch_active_7" },
+		{ "predicate": { "shattered_stopwatch:tick": 18 }, "model": "shattered_stopwatch:item/stopwatch_active_8" },
+		{ "predicate": { "shattered_stopwatch:tick": 19 }, "model": "shattered_stopwatch:item/stopwatch_active_9" }
+	]
+}

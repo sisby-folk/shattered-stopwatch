@@ -4,11 +4,16 @@
 		"layer0": "shattered_stopwatch:item/stopwatch"
 	},
 	"overrides": [
-		{
-			"predicate": {
-				"shattered_stopwatch:stopwatch_active": 1
-			},
-			"model": "shattered_stopwatch:item/stopwatch_active"
-		}
+		{ "predicate": { "shattered_stopwatch:tick": 0.0 }, "model": "shattered_stopwatch:item/stopwatch" },
+		{ "predicate": { "shattered_stopwatch:tick": 0.1 }, "model": "shattered_stopwatch:item/stopwatch_active_0" },
+		{ "predicate": { "shattered_stopwatch:tick": 0.2 }, "model": "shattered_stopwatch:item/stopwatch_active_1" },
+		{ "predicate": { "shattered_stopwatch:tick": 0.3 }, "model": "shattered_stopwatch:item/stopwatch_active_2" },
+		{ "predicate": { "shattered_stopwatch:tick": 0.4 }, "model": "shattered_stopwatch:item/stopwatch_active_3" },
+		{ "predicate": { "shattered_stopwatch:tick": 0.5 }, "model": "shattered_stopwatch:item/stopwatch_active_4" },
+		{ "predicate": { "shattered_stopwatch:tick": 0.6 }, "model": "shattered_stopwatch:item/stopwatch_active_5" },
+		{ "predicate": { "shattered_stopwatch:tick": 0.7 }, "model": "shattered_stopwatch:item/stopwatch_active_6" },
+		{ "predicate": { "shattered_stopwatch:tick": 0.8 }, "model": "shattered_stopwatch:item/stopwatch_active_7" },
+		{ "predicate": { "shattered_stopwatch:tick": 0.9 }, "model": "shattered_stopwatch:item/stopwatch_active_8" },
+		{ "predicate": { "shattered_stopwatch:tick": 1.0 }, "model": "shattered_stopwatch:item/stopwatch_active_9" }
 	]
 }
