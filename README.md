@@ -1,7 +1,8 @@
 <!--suppress HtmlDeprecatedTag, XmlDeprecatedElement -->
 <center>
 <img alt="preview" src="https://cdn.modrinth.com/data/So5Pd4qV/images/de94273e65ceb60e704ca964fa3c208511913752.png"><br/>
-A broken traversal mechanic styled after first-person puzzler games and SM64 ABC.<br/>
+<i>Don't abandon your past; embrace it.</i><br/>
+A time-travelling tool with 2ⁿ complexity double-jumps. That's a normal sentence.<br/>
 <b>Requires <a href="https://modrinth.com/mod/connector">Connector</a> and <a href="https://modrinth.com/mod/forgified-fabric-api">FFAPI</a> on (neo)forge.<br/></b>
 </center>
 
