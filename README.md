@@ -1,14 +1,13 @@
 <!--suppress HtmlDeprecatedTag, XmlDeprecatedElement -->
 <center>
-<img alt="preview" src="https://cdn.modrinth.com/data/So5Pd4qV/images/de94273e65ceb60e704ca964fa3c208511913752.png"><br/>
+<img alt="preview" src="https://cdn.modrinth.com/data/So5Pd4qV/images/511ddb6f58e5a08b9e5f6086adb9c76bcb721812.gif"><br/>
 <i>Don't abandon your past; embrace it.</i><br/>
-A time-travelling tool with 2ⁿ complexity double-jumps. That's a normal sentence.<br/>
 <b>Requires <a href="https://modrinth.com/mod/connector">Connector</a> and <a href="https://modrinth.com/mod/forgified-fabric-api">FFAPI</a> on (neo)forge.<br/></b>
 </center>
 
 ---
 
-This mod adds the **Shattered Stopwatch**, an obtuse and inconvenient traversal tool:
+The **Shattered Stopwatch** is an strange and obtuse traversal tool:
 - Use the stopwatch to set a **starting point** at your feet.
 - Use it again to return there, leaving an **echo** at your previous location.
 - Collide with an echo to shatter it, bouncing you into the air.
@@ -16,13 +15,17 @@ This mod adds the **Shattered Stopwatch**, an obtuse and inconvenient traversal 
 - Keep the stopwatch in your hands, or it'll break again! Sneak-use also breaks it deliberately.
 - Enchant the watch with **Reflection** so echoes can be used twice - but not in the same lap.
 
-Shattered Stopwatch is designed as a toy, but has recipes for completeness:
+![tooltip](https://cdn.modrinth.com/data/So5Pd4qV/images/63e9481bb18eec235309ed5dcd4aea8af85f5127.gif)
+
+## Recipes 
+
+#### Shattered Stopwatch
 
 ![recipe](https://cdn.modrinth.com/data/So5Pd4qV/images/0b73d7e165690a63ca77bc8e50256e634e91a409.png)
 
-![enchantment recipe](https://cdn.modrinth.com/data/So5Pd4qV/images/80f6e855101b5744991ef7de85c1d45fbbd4f743.png)
+#### Enchanted Book (Reflection)
 
-Have fun!
+![enchantment recipe](https://cdn.modrinth.com/data/So5Pd4qV/images/80f6e855101b5744991ef7de85c1d45fbbd4f743.png)
 
 ---
 
