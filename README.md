@@ -7,13 +7,18 @@
 
 ---
 
-The **Shattered Stopwatch** is an strange and obtuse traversal tool:
+**Shattered Stopwatch** adds an obtuse time-travelling item that allows:
+- Returning to a past location, if you hold on tight.
+- Infinite double-jumping, if you're willing to spend an exponential amount of time.
+
+Here's how it works:
 - Use the stopwatch to set a **starting point** at your feet.
 - Use it again to return there, leaving an **echo** at your previous location.
 - Collide with an echo to shatter it, bouncing you into the air.
-- Echoes can only be used once, but you can use echoes to create farther echoes!
-- Keep the stopwatch in your hands, or it'll break again! Sneak-use also breaks it deliberately.
-- Enchant the watch with **Reflection** so echoes can be used twice - but not in the same lap.
+- Echoes can only be used once, can be chained together over many laps.
+
+Keep the stopwatch in your hands, or it'll break again!<br/>
+The **Reflection** enchantment allows echoes to be shattered in two different laps, and alters some flavour text.
 
 ![tooltip](https://cdn.modrinth.com/data/So5Pd4qV/images/63e9481bb18eec235309ed5dcd4aea8af85f5127.gif)
 
