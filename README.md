@@ -15,7 +15,7 @@ Here's how it works:
 - Use the stopwatch to set a **starting point** at your feet.
 - Use it again to return there, leaving an **echo** at your previous location.
 - Collide with an echo to shatter it, bouncing you into the air.
-- Echoes can only be used once, can be chained together over many laps.
+- Echoes can only be used once, but can be chained into bridges if you're patient.
 
 Keep the stopwatch in your hands, or it'll break again!<br/>
 The **Reflection** enchantment allows echoes to be shattered in two different laps, and alters some flavour text.
